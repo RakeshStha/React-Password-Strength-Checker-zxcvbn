@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Container, Form, Button, Card, Jumbotron } from 'react-bootstrap';
-import PasswordStrengthMeter from './components/PasswordStrengthMeter';
+
 
 
 function App() {
@@ -10,11 +10,9 @@ const [confirmPassword, setConfirmPassword] = useState('');
 const [isError, setIsError] = useState('');
 
 const checkValidation = (e)=>{
-  setConfirmPassword(e.target.value);
-  
-  if (password != e.target.value){
-
-    setIsError('Passwords do not match');
+  setConfirmPassword(e.target.value)
+  if (password !== confirmPassword){
+    setIsError("Passwords do not match");
   }
   else{
     setIsError('');
@@ -53,7 +51,7 @@ const checkValidation = (e)=>{
               placeholder="Password" 
               onChange={e => setPassword(e.target.value)}
               />
-              <PasswordStrengthMeter password={password}/>
+             <div className="text-danger">{isError}</div>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -63,9 +61,9 @@ const checkValidation = (e)=>{
               onChange={(e) => checkValidation(e)}
                placeholder="Confirm Password" 
                />
-              
+              <div className="text-danger">{isError}</div>
             </Form.Group>
-            <div className="text-danger">{isError}</div>
+            
 
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="I agree Terms and condition" />
